@@ -25,3 +25,6 @@ Features
 ✅ Up to 2 rerolls per round
 ✅ Leaderboard to track top scores
 ✅ Easy-to-use UI with interactive dice selection
+
+To add:
+Scoring rules, instead of total sum
