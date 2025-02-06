@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Dice from "./Dice"; // Import the Dice component
 import "../styles/App.css";
 
 const generateDailyRolls = () => {
-  const seed = new Date().toISOString().split("T")[0]; // Use date as seed for consistency
-  let rolls = [];
-  for (let i = 0; i < 6; i++) {
-    // 6 rounds
-    rolls.push(
-      Array.from({ length: 5 }, () => Math.floor(Math.random() * 6) + 1)
+  return Array(6)
+    .fill()
+    .map(() =>
+      Array(5)
+        .fill()
+        .map(() => Math.floor(Math.random() * 6) + 1)
     );
-  }
-  return rolls;
 };
 
 export default function DiceGame() {
@@ -21,32 +20,43 @@ export default function DiceGame() {
   const [roundScores, setRoundScores] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [rerollCount, setRerollCount] = useState(2);
+  const [rollingDice, setRollingDice] = useState([]);
 
   const reroll = () => {
     if (rerollCount > 0 && currentRound < 6) {
-      setRolls((prevRolls) => {
-        const newRolls = prevRolls.map((round, index) => {
-          if (index === currentRound) {
-            return round.map((die, i) =>
-              selectedDice.includes(i) ? die : Math.floor(Math.random() * 6) + 1
-            );
-          }
-          return round;
+      const diceToRoll = rolls[currentRound]
+        .map((_, i) => (selectedDice.includes(i) ? null : i))
+        .filter((i) => i !== null);
+
+      setRollingDice(diceToRoll);
+
+      setTimeout(() => {
+        setRolls((prevRolls) => {
+          const newRolls = prevRolls.map((round, index) =>
+            index === currentRound
+              ? round.map((die, i) =>
+                  diceToRoll.includes(i)
+                    ? Math.floor(Math.random() * 6) + 1
+                    : die
+                )
+              : round
+          );
+          return [...newRolls];
         });
-        return [...newRolls];
-      });
-      setRerollCount((prevCount) => prevCount - 1);
+        setRollingDice([]); // Stop rolling effect
+      }, 2000);
+
+      setRerollCount((prev) => prev - 1);
     }
   };
-
   const lockInScore = () => {
     if (currentRound < 6) {
       const roundScore = rolls[currentRound].reduce((a, b) => a + b, 0);
       setScore((prevScore) => prevScore + roundScore);
       setRoundScores((prevScores) => [...prevScores, roundScore]);
       setCurrentRound((prevRound) => prevRound + 1);
-      setRerollCount(2); // Reset reroll count for next round
-      setSelectedDice([]); // Reset selection for the new round
+      setRerollCount(2);
+      setSelectedDice([]);
     }
   };
 
@@ -67,8 +77,11 @@ export default function DiceGame() {
       <p>Rerolls left: {rerollCount}</p>
       <div className="dice-container">
         {rolls[currentRound]?.map((die, index) => (
-          <button
+          <Dice
             key={index}
+            value={die}
+            isRolling={rollingDice.includes(index)}
+            isSelected={selectedDice.includes(index)}
             onClick={() =>
               setSelectedDice((prevSelected) =>
                 prevSelected.includes(index)
@@ -76,12 +89,7 @@ export default function DiceGame() {
                   : [...prevSelected, index]
               )
             }
-            className={`dice ${
-              selectedDice.includes(index) ? "selected" : "locked"
-            }`}
-          >
-            {die}
-          </button>
+          />
         ))}
       </div>
       <div className="button-container">
