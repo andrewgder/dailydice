@@ -69,12 +69,16 @@ export default function DiceGame() {
       return newLeaderboard;
     });
   };
+  const gameOver = currentRound + 1 === 7;
 
   return (
     <div className="game-container">
       <h1 className="title">Daily Dice Challenge</h1>
-      <h2 className="round">Round {currentRound + 1}/6</h2>
-      <p>Rerolls left: {rerollCount}</p>
+      <h2 className="round">
+        {" "}
+        {gameOver ? "Game Over!" : `Round ${currentRound + 1}/6`}
+      </h2>
+      <p> {gameOver ? "" : `Rerolls left: ${rerollCount}`}</p>
       <div className="dice-container">
         {rolls[currentRound]?.map((die, index) => (
           <Dice
