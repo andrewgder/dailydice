@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Dice from "./Dice"; // Import the Dice component
 import "../styles/App.css";
+import DiceRollAudio from "./DiceAudio";
 
 const generateDailyRolls = () => {
   return Array(6)
@@ -24,6 +25,7 @@ export default function DiceGame() {
 
   const reroll = () => {
     if (rerollCount > 0 && currentRound < 6) {
+      DiceRollAudio();
       const diceToRoll = rolls[currentRound]
         .map((_, i) => (selectedDice.includes(i) ? null : i))
         .filter((i) => i !== null);
@@ -51,12 +53,17 @@ export default function DiceGame() {
   };
   const lockInScore = () => {
     if (currentRound < 6) {
-      const roundScore = rolls[currentRound].reduce((a, b) => a + b, 0);
-      setScore((prevScore) => prevScore + roundScore);
-      setRoundScores((prevScores) => [...prevScores, roundScore]);
-      setCurrentRound((prevRound) => prevRound + 1);
-      setRerollCount(2);
-      setSelectedDice([]);
+      DiceRollAudio();
+      setRollingDice([...Array(5).keys()]);
+      setTimeout(() => {
+        setRollingDice([]); // Stop rolling animation after 1 second
+        const roundScore = rolls[currentRound].reduce((a, b) => a + b, 0);
+        setScore((prevScore) => prevScore + roundScore);
+        setRoundScores((prevScores) => [...prevScores, roundScore]);
+        setCurrentRound((prevRound) => prevRound + 1);
+        setRerollCount(2);
+        setSelectedDice([]);
+      }, 2000); // Matches the rolling animation time (1s)
     }
   };
 
