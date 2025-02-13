@@ -2,6 +2,8 @@ import { useState } from "react";
 import Dice from "./Dice"; // Import the Dice component
 import "../styles/App.css";
 import DiceRollAudio from "./DiceAudio";
+import GameRules from "./InfoModal";
+import InfoModal from "./InfoModal";
 
 const generateDailyRolls = () => {
   return Array(6)
@@ -80,7 +82,9 @@ export default function DiceGame() {
 
   return (
     <div className="game-container">
-      <h1 className="title">Daily Dice Challenge</h1>
+      <h1 className="title">
+        Daily Dice Challenge <InfoModal />
+      </h1>
       <h2 className="round">
         {" "}
         {gameOver ? "Game Over!" : `Round ${currentRound + 1}/6`}
