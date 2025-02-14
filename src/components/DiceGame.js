@@ -108,14 +108,19 @@ export default function DiceGame() {
         ))}
       </div>
       <div className="button-container">
-        {rerollCount > 0 && (
-          <button className="action-button" onClick={reroll}>
-            Reroll Unselected
-          </button>
+        {" "}
+        {!gameOver && (
+          <>
+            {rerollCount > 0 && (
+              <button className="action-button" onClick={reroll}>
+                Reroll Unselected
+              </button>
+            )}
+            <button className="action-button" onClick={lockInScore}>
+              Lock In Score
+            </button>{" "}
+          </>
         )}
-        <button className="action-button" onClick={lockInScore}>
-          Lock In Score
-        </button>
         {currentRound === 6 && (
           <button className="submit-button" onClick={submitScore}>
             Submit Score
