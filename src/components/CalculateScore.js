@@ -10,7 +10,10 @@ const CalculateScore = (dice) => {
   const hasThree = Object.values(counts).includes(3);
   const hasFour = Object.values(counts).includes(4);
   const hasFive = Object.values(counts).includes(5);
+  const hasPair = Object.values(counts).includes(2);
   const sumOfDice = dice.reduce((a, b) => a + b, 0);
+
+  const isFullHouse = hasThree && hasPair;
 
   // Check for small and large straights
   const isSmallStraight =
@@ -32,10 +35,11 @@ const CalculateScore = (dice) => {
     ((values[0] === 1 && values[4] === 5) ||
       (values[0] === 2 && values[4] === 6));
 
-  if (hasFive) return 50; // Five of a kind
-  if (isLargeStraight) return 30; // Large straight
-  if (isSmallStraight) return 20; // Small straight
-  if (hasFour) return sumOfDice; // Four of a kind
+  if (hasFive) return 100; // Five of a kind
+  if (isLargeStraight) return 50; // Large straight
+  if (isSmallStraight) return 30; // Small straight
+  if (isFullHouse) return 35; // Full House
+  if (hasFour) return sumOfDice + 10; // Four of a kind + 10 bonus
   if (hasThree) return sumOfDice; // Three of a kind
 
   return 0; // No valid score
