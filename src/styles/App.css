@@ -129,3 +129,23 @@ body {
     transform: rotate(360deg) scale(1);
   }
 }
+
+.score-preview {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background: #e3f2fd;
+  text-align: center;
+}
+
+.score-preview h3 {
+  font-size: 18px;
+  color: #0056b3;
+}
+
+.score-preview p {
+  font-size: 16px;
+  margin: 5px 0;
+}

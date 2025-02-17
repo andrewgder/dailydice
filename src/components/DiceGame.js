@@ -2,8 +2,9 @@ import { useState } from "react";
 import Dice from "./Dice"; // Import the Dice component
 import "../styles/App.css";
 import DiceRollAudio from "./DiceAudio";
-import GameRules from "./InfoModal";
 import InfoModal from "./InfoModal";
+import CalculateScore from "./CalculateScore";
+import ScorePreview from "./ScorePreview";
 
 const generateDailyRolls = () => {
   return Array(6)
@@ -59,7 +60,7 @@ export default function DiceGame() {
       setRollingDice([...Array(5).keys()]);
       setTimeout(() => {
         setRollingDice([]); // Stop rolling animation after 1 second
-        const roundScore = rolls[currentRound].reduce((a, b) => a + b, 0);
+        const roundScore = CalculateScore(rolls[currentRound]);
         setScore((prevScore) => prevScore + roundScore);
         setRoundScores((prevScores) => [...prevScores, roundScore]);
         setCurrentRound((prevRound) => prevRound + 1);
@@ -107,6 +108,8 @@ export default function DiceGame() {
           />
         ))}
       </div>
+      <ScorePreview dice={rolls[currentRound]} />
+
       <div className="button-container">
         {" "}
         {!gameOver && (
