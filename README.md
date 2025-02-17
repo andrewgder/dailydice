@@ -26,5 +26,20 @@ Features
 ✅ Leaderboard to track top scores
 ✅ Easy-to-use UI with interactive dice selection
 
-To add:
-Scoring rules, instead of total sum
+### 🔢 **Scoring Rules**
+
+| Rule                                                           | Points                     |
+| -------------------------------------------------------------- | -------------------------- |
+| **Five of a Kind** (All dice are the same)                     | **100 points**             |
+| **Large Straight** (Five consecutive numbers, e.g., 1-2-3-4-5) | **50 points**              |
+| **Small Straight** (Four consecutive numbers, e.g., 2-3-4-5)   | **30 points**              |
+| **Full House** (Three of a kind + a pair)                      | **35 points**              |
+| **Four of a Kind** (Four dice are the same)                    | **Sum of dice + 10 bonus** |
+| **Three of a Kind** (Three dice are the same)                  | **Sum of dice**            |
+| **No rule met**                                                | **0 points**               |
+
+💡 **Strategy Tip:**
+
+- Risk going for a **Large Straight** for the 50-point bonus, or play it safe with a **Full House (35 points)**.
+- **Five of a Kind** is rare but game-changing!
+- **Four of a Kind** gets an extra **+10 bonus**, making it a strong option.

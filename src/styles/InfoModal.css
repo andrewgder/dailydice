@@ -7,7 +7,7 @@
 
 /* Info Icon Style */
 .info-icon {
-  font-size: 22px;
+  font-size: 20px;
   color: #007bff;
   cursor: pointer;
   transition: color 0.3s;
@@ -17,32 +17,53 @@
   color: #0056b3;
 }
 
-/* Fullscreen Modal Overlay */
+/* Fullscreen Modal Overlay (Ensures it appears over the game) */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000; /* High value ensures it appears on top */
 }
 
 /* Centered Modal Content */
 .modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 25px;
+  border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
+  max-width: 420px;
   text-align: center;
   position: relative;
+  z-index: 3000; /* Ensures modal content stays above overlay */
 }
 
-/* Exit on click anywhere */
+/* Scoring Rules Section */
+.scoring-rules {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.scoring-rules p {
+  font-size: 16px;
+  margin: 5px 0;
+  text-align: left;
+}
+
+/* Modal Footer */
+.modal-footer {
+  font-style: italic;
+  margin-top: 15px;
+}
+
+/* Close by Clicking Anywhere */
 .modal-overlay:after {
   content: "";
   position: absolute;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
-import "../styles/InfoModal.css"; // Ensure the styles are applied
+import "../styles/InfoModal.css";
 
 const InfoModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,22 +15,49 @@ const InfoModal = () => {
         <div className="modal-overlay" onClick={() => setIsOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>Game Rules</h2>
-            <ul>
-              <li>Each game consists of 6 rounds.</li>
-              <li>You roll 5 dice per round.</li>
-              <li>You can reroll up to 2 times per round.</li>
-              <li>Score is based on the total sum or special combinations:</li>
-              <ul>
-                <li>3 of a Kind: Sum of all dice.</li>
-                <li>4 of a Kind: Sum of all dice.</li>
-                <li>Full House: 25 points.</li>
-                <li>Small Straight: 30 points.</li>
-                <li>Large Straight: 40 points.</li>
-                <li>Yahtzee (5 of a Kind): 50 points.</li>
-                <li>Chance: Sum of all dice.</li>
-              </ul>
-              <li>Maximize points using strategic rerolls!</li>
-            </ul>
+
+            <p>Each game consists of 6 rounds</p>
+            <p>
+              <>You roll 5 dice per round</>
+            </p>
+            <p>
+              <>
+                You can select dice to save and reroll up to 2 times per round
+              </>
+            </p>
+
+            <h5>🎲 Scoring System</h5>
+
+            <div className="scoring-rules">
+              <p>
+                <strong>Five of a Kind:</strong> 100 points
+              </p>
+              <p>
+                <strong>Large Straight:</strong> 50 points (1-2-3-4-5 or
+                2-3-4-5-6)
+              </p>
+              <p>
+                <strong>Small Straight:</strong> 30 points (Any 4 consecutive
+                numbers)
+              </p>
+              <p>
+                <strong>Full House:</strong> 35 points (Three of a kind + a
+                pair)
+              </p>
+              <p>
+                <strong>Four of a Kind:</strong> Sum of dice + 10 bonus
+              </p>
+              <p>
+                <strong>Three of a Kind:</strong> Sum of dice
+              </p>
+              <p>
+                <strong>No Match:</strong> 0 points
+              </p>
+            </div>
+
+            <p className="modal-footer">
+              Roll the dice, strategize, and aim for the high score! 🚀🔥
+            </p>
           </div>
         </div>
       )}
