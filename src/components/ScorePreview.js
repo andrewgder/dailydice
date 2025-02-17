@@ -42,7 +42,7 @@ const getAppliedRule = (dice) => {
   if (isLargeStraight) return "Large Straight (50 points)";
   if (isSmallStraight) return "Small Straight (30 points)";
   if (isFullHouse) return "Full House (35 points)";
-  if (hasFour) return `Four of a Kind (Sum: ${sumOfDice} + 10)`;
+  if (hasFour) return `Four of a Kind (Sum: ${sumOfDice} + 10 Bonus)`;
   if (hasThree) return `Three of a Kind (Sum: ${sumOfDice})`;
 
   return "No rule applied (0 points)";

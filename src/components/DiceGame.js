@@ -25,6 +25,8 @@ export default function DiceGame() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [rerollCount, setRerollCount] = useState(2);
   const [rollingDice, setRollingDice] = useState([]);
+  const [playerName, setPlayerName] = useState(""); // New state for player name
+  const [gameOver, setGameOver] = useState(false);
 
   const reroll = () => {
     if (rerollCount > 0 && currentRound < 6) {
@@ -67,19 +69,29 @@ export default function DiceGame() {
         setRerollCount(2);
         setSelectedDice([]);
       }, 2000); // Matches the rolling animation time (1s)
+      if (currentRound === 5) {
+        setGameOver(true);
+      }
     }
   };
 
   const submitScore = () => {
+    if (!playerName.trim()) {
+      alert("Please enter your name before submitting!");
+      return;
+    }
+
     setLeaderboard((prevLeaderboard) => {
       const newLeaderboard = [
         ...prevLeaderboard,
-        { name: "Player", score },
+        { name: playerName, score },
       ].sort((a, b) => b.score - a.score);
       return newLeaderboard;
     });
+
+    setPlayerName(""); // Reset input after submission
+    // Reset game state
   };
-  const gameOver = currentRound + 1 === 7;
 
   return (
     <div className="game-container">
@@ -124,10 +136,20 @@ export default function DiceGame() {
             </button>{" "}
           </>
         )}
-        {currentRound === 6 && (
-          <button className="submit-button" onClick={submitScore}>
-            Submit Score
-          </button>
+        {gameOver && (
+          <div className="game-over">
+            <h3>Game Over! Enter your name:</h3>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+              className="name-input"
+            />
+            <button className="submit-button" onClick={submitScore}>
+              Submit Score
+            </button>
+          </div>
         )}
       </div>
       <h2 className="score">Total Score: {score}</h2>
