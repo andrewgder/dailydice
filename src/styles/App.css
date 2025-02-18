@@ -24,6 +24,21 @@ body {
   margin-bottom: 15px;
 }
 
+.round-scores {
+  list-style: none; /* Remove bullets */
+  padding: 0;
+  text-align: center; /* Left-align text */
+  margin-left: 10px; /* Adjust spacing */
+}
+
+.round-score-entry {
+  font-size: 16px;
+  padding: 5px 0;
+  width: 100%;
+  display: block;
+  justify-content: space-between;
+}
+
 .dice-container {
   display: flex;
   justify-content: center;
@@ -171,4 +186,38 @@ body {
 
 .game-over h3 {
   margin-bottom: 10px;
+}
+
+.round-scores-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.round-numbers,
+.round-score-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.round-numbers {
+  margin-bottom: 1px; /* Space between numbers and boxes */
+}
+
+.round-number {
+  width: 44px; /* Same width as the score box */
+  text-align: center;
+}
+
+.round-score-box {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #f8f9fa;
 }

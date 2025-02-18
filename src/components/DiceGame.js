@@ -154,13 +154,26 @@ export default function DiceGame() {
       </div>
       <h2 className="score">Total Score: {score}</h2>
       <h3 className="round-scores-title">Round Scores</h3>
-      <ul className="round-scores">
-        {roundScores.map((roundScore, index) => (
-          <li key={index} className="round-score-entry">
-            Round {index + 1}: {roundScore}
-          </li>
-        ))}
-      </ul>
+      <div className="round-scores-container">
+        {/* Round Numbers */}
+        <div className="round-numbers">
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="round-number">
+              {index + 1}
+            </div>
+          ))}
+        </div>
+
+        {/* Score Boxes */}
+        <div className="round-score-boxes">
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="round-score-box">
+              {roundScores[index] !== undefined ? roundScores[index] : "-"}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <h3 className="leaderboard-title">Leaderboard</h3>
       <ul className="leaderboard">
         {leaderboard.map((entry, index) => (
