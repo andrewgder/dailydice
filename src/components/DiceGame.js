@@ -57,21 +57,25 @@ export default function DiceGame() {
     }
   };
   const lockInScore = () => {
-    if (currentRound < 6) {
+    if (currentRound === 5) {
+      const roundScore = CalculateScore(rolls[currentRound]);
+      setScore((prevScore) => prevScore + roundScore);
+      setRoundScores((prevScores) => [...prevScores, roundScore]);
+      setGameOver(true);
+    }
+    if (currentRound < 5) {
+      const roundScore = CalculateScore(rolls[currentRound]);
+      setScore((prevScore) => prevScore + roundScore);
+      setRoundScores((prevScores) => [...prevScores, roundScore]);
       DiceRollAudio();
+      setSelectedDice([]);
       setRollingDice([...Array(5).keys()]);
       setTimeout(() => {
         setRollingDice([]); // Stop rolling animation after 1 second
-        const roundScore = CalculateScore(rolls[currentRound]);
-        setScore((prevScore) => prevScore + roundScore);
-        setRoundScores((prevScores) => [...prevScores, roundScore]);
         setCurrentRound((prevRound) => prevRound + 1);
         setRerollCount(2);
         setSelectedDice([]);
       }, 2000); // Matches the rolling animation time (1s)
-      if (currentRound === 5) {
-        setGameOver(true);
-      }
     }
   };
 
