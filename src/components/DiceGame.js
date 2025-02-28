@@ -27,8 +27,11 @@ export default function DiceGame() {
   const [rollingDice, setRollingDice] = useState([]);
   const [playerName, setPlayerName] = useState(""); // New state for player name
   const [gameOver, setGameOver] = useState(false);
+  const [lockDisabled, setLockDisabled] = useState(false);
 
   const reroll = () => {
+    if (lockDisabled) return;
+    setLockDisabled(true);
     if (rerollCount > 0 && currentRound < 6) {
       DiceRollAudio();
       const diceToRoll = rolls[currentRound]
@@ -50,13 +53,16 @@ export default function DiceGame() {
           );
           return [...newRolls];
         });
-        setRollingDice([]); // Stop rolling effect
+        setRollingDice([]);
+        setLockDisabled(false); // Stop rolling effect
       }, 2000);
 
       setRerollCount((prev) => prev - 1);
     }
   };
   const lockInScore = () => {
+    if (lockDisabled) return;
+    setLockDisabled(true);
     if (currentRound === 5) {
       const roundScore = CalculateScore(rolls[currentRound]);
       setScore((prevScore) => prevScore + roundScore);
@@ -75,6 +81,7 @@ export default function DiceGame() {
         setCurrentRound((prevRound) => prevRound + 1);
         setRerollCount(2);
         setSelectedDice([]);
+        setLockDisabled(false);
       }, 2000); // Matches the rolling animation time (1s)
     }
   };
@@ -131,11 +138,19 @@ export default function DiceGame() {
         {!gameOver && (
           <>
             {rerollCount > 0 && (
-              <button className="action-button" onClick={reroll}>
+              <button
+                className="action-button"
+                onClick={reroll}
+                disabled={lockDisabled}
+              >
                 Reroll Unselected
               </button>
             )}
-            <button className="action-button" onClick={lockInScore}>
+            <button
+              className="action-button"
+              disabled={lockDisabled}
+              onClick={lockInScore}
+            >
               Lock In Score
             </button>{" "}
           </>
