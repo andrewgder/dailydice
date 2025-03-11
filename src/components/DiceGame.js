@@ -102,6 +102,15 @@ export default function DiceGame() {
 
     setPlayerName(""); // Reset input after submission
     // Reset game state
+    // Reset the game state for a new game
+    setRolls(generateDailyRolls());
+    setCurrentRound(0);
+    setScore(0);
+    setRoundScores([]);
+    setSelectedDice([]);
+    setRerollCount(2);
+    setLockDisabled(false);
+    setGameOver(false);
   };
 
   return (
