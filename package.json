@@ -7,13 +7,13 @@
     "dotenv": "^16.4.7",
     "firebase": "^11.4.0",
     "firebase-admin": "^13.2.0",
+    "nth-check": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^4.2.4",
-    "webpack": "^5.98.0",
-    "nth-check": "^2.1.1"
+    "webpack": "^5.98.0"
   },
   "scripts": {
     "start": "react-scripts start",

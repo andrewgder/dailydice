@@ -5,6 +5,7 @@ import DiceRollAudio from "./DiceAudio";
 import InfoModal from "./InfoModal";
 import CalculateScore from "./CalculateScore";
 import ScorePreview from "./ScorePreview";
+import HighScoreSubmit from "./HighScoreSubmit";
 
 const generateDailyRolls = () => {
   return Array(6)
@@ -85,7 +86,16 @@ export default function DiceGame() {
       }, 2000); // Matches the rolling animation time (1s)
     }
   };
-
+  // Optionally, you can still update your local leaderboard here
+  const updateLeaderboard = () => {
+    setLeaderboard((prevLeaderboard) => {
+      const newLeaderboard = [
+        ...prevLeaderboard,
+        { name: "Player", score },
+      ].sort((a, b) => b.score - a.score);
+      return newLeaderboard;
+    });
+  };
   const submitScore = () => {
     if (!playerName.trim()) {
       alert("Please enter your name before submitting!");
@@ -174,9 +184,11 @@ export default function DiceGame() {
               onChange={(e) => setPlayerName(e.target.value)}
               className="name-input"
             />
-            <button className="submit-button" onClick={submitScore}>
-              Submit Score
-            </button>
+            <HighScoreSubmit
+              score={score}
+              onScoreSubmitted={updateLeaderboard}
+              playerName={playerName}
+            />
           </div>
         )}
       </div>

@@ -1,19 +1,19 @@
 // firebase.js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { firebaseConfig } from "../config";
+// require("dotenv").config();
 
-import firebase from "firebase/app";
-import "firebase/firestore";
-require("dotenv").config();
+// // Replace with your own Firebase config object
+// const firebaseConfig = {
+//   apiKey: process.env.apiKey,
+//   authDomain: process.env.authDomain,
+//   projectId: process.env.projectId,
+//   // ... other config values
+// };
 
-// Replace with your own Firebase config object
-const firebaseConfig = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
-  projectId: process.env.projectId,
-  // ... other config values
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.firestore();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export { db };
