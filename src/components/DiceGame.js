@@ -6,6 +6,7 @@ import InfoModal from "./InfoModal";
 import CalculateScore from "./CalculateScore";
 import ScorePreview from "./ScorePreview";
 import HighScoreSubmit from "./HighScoreSubmit";
+import Leaderboard from "./Leaderboard";
 
 const generateDailyRolls = () => {
   return Array(6)
@@ -87,15 +88,15 @@ export default function DiceGame() {
     }
   };
   // Optionally, you can still update your local leaderboard here
-  const updateLeaderboard = () => {
-    setLeaderboard((prevLeaderboard) => {
-      const newLeaderboard = [
-        ...prevLeaderboard,
-        { name: "Player", score },
-      ].sort((a, b) => b.score - a.score);
-      return newLeaderboard;
-    });
-  };
+  // const updateLeaderboard = () => {
+  //   setLeaderboard((prevLeaderboard) => {
+  //     const newLeaderboard = [
+  //       ...prevLeaderboard,
+  //       { name: "Player", score },
+  //     ].sort((a, b) => b.score - a.score);
+  //     return newLeaderboard;
+  //   });
+  // };
   const resetGame = () => {
     if (!playerName.trim()) {
       alert("Please enter your name before submitting!");
@@ -187,7 +188,6 @@ export default function DiceGame() {
             <HighScoreSubmit
               score={score}
               onScoreSubmitted={() => {
-                updateLeaderboard();
                 resetGame();
               }}
               playerName={playerName}
@@ -216,15 +216,7 @@ export default function DiceGame() {
           ))}
         </div>
       </div>
-
-      <h3 className="leaderboard-title">Leaderboard</h3>
-      <ul className="leaderboard">
-        {leaderboard.map((entry, index) => (
-          <li key={index} className="leaderboard-entry">
-            {entry.name}: {entry.score}
-          </li>
-        ))}
-      </ul>
+      <Leaderboard></Leaderboard>
     </div>
   );
 }
