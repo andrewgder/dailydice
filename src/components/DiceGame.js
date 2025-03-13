@@ -96,7 +96,7 @@ export default function DiceGame() {
       return newLeaderboard;
     });
   };
-  const submitScore = () => {
+  const resetGame = () => {
     if (!playerName.trim()) {
       alert("Please enter your name before submitting!");
       return;
@@ -186,7 +186,10 @@ export default function DiceGame() {
             />
             <HighScoreSubmit
               score={score}
-              onScoreSubmitted={updateLeaderboard}
+              onScoreSubmitted={() => {
+                updateLeaderboard();
+                resetGame();
+              }}
               playerName={playerName}
             />
           </div>
