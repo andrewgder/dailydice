@@ -18,7 +18,6 @@ const getStartOfWeek = () => {
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() - dayOfWeek); // Move to Sunday
   startOfWeek.setHours(0, 0, 0, 0); // Reset time
-  console.log(startOfWeek);
 
   return Timestamp.fromDate(startOfWeek); // Convert to Firestore Timestamp
 };
