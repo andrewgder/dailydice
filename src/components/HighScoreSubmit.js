@@ -1,6 +1,6 @@
 // HighScoreSubmit.js
 import React from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 
 const HighScoreSubmit = ({ score, onScoreSubmitted, playerName }) => {
@@ -9,7 +9,7 @@ const HighScoreSubmit = ({ score, onScoreSubmitted, playerName }) => {
       await addDoc(collection(db, "highScores"), {
         name: playerName,
         score: score,
-        date: new Date(), // or use serverTimestamp() if needed
+        timestamp: serverTimestamp(), // firestore timestamp
       });
       console.log("High score stored in Firestore.");
       if (onScoreSubmitted) onScoreSubmitted();
