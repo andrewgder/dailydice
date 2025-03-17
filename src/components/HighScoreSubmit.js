@@ -2,11 +2,13 @@
 import React from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
-
+import { getToken } from "firebase/app-check";
+import { appCheck } from "./firebase";
 const HighScoreSubmit = ({ score, onScoreSubmitted, playerName }) => {
   const submitScore = async () => {
     if (playerName) {
       try {
+        await getToken(appCheck, false);
         await addDoc(collection(db, "highScores"), {
           name: playerName,
           score: score,

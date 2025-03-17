@@ -1,7 +1,17 @@
 // firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { firebaseConfig } from "../config";
+import { firebaseConfig, siteKey, debugToken } from "../config";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { getAuth, signInAnonymously } from "firebase/auth";
+if (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+) {
+  window.FIREBASE_APPCHECK_DEBUG_TOKEN = debugToken;
+  console.log("Debug token set:", !!debugToken);
+}
+
 // require("dotenv").config();
 
 // // Replace with your own Firebase config object
@@ -14,6 +24,16 @@ import { firebaseConfig } from "../config";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(siteKey),
+  isTokenAutoRefreshEnabled: true,
+});
+
 const db = getFirestore(app);
-export { app };
-export { db };
+
+// In your app initialization
+const auth = getAuth(app);
+signInAnonymously(auth);
+
+export { app, db, appCheck };
