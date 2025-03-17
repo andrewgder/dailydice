@@ -12,7 +12,7 @@ if (
   console.log("Debug token set:", !!debugToken);
 }
 
-// require("dotenv").config();
+// console.log(process.env.firebaseConfig);
 
 // // Replace with your own Firebase config object
 // const firebaseConfig = {
