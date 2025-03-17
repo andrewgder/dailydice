@@ -179,8 +179,8 @@ body {
 .game-over {
   margin-top: 20px;
   padding: 15px;
-  background: #fff3cd;
-  border: 1px solid #ffeeba;
+  background: #edecea;
+  border: 1px solid #6c6a65;
   border-radius: 5px;
 }
 

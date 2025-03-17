@@ -99,7 +99,6 @@ export default function DiceGame() {
   // };
   const resetGame = () => {
     if (!playerName.trim()) {
-      alert("Please enter your name before submitting!");
       return;
     }
 
@@ -177,10 +176,10 @@ export default function DiceGame() {
         )}
         {gameOver && (
           <div className="game-over">
-            <h3>Game Over! Enter your name:</h3>
+            <h3> Enter your name to submit your score!</h3>
             <input
               type="text"
-              placeholder="Your Name"
+              placeholder="Name"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
               className="name-input"

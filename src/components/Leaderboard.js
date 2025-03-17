@@ -53,11 +53,24 @@ const Leaderboard = () => {
     <div>
       <h3 className="leaderboard">Weekly Top 10 Leaderboard</h3>
       <ul className="leaderboard">
-        {scores.map((score, index) => (
-          <li key={score.id} className="leaderboard-entry">
-            {index + 1}. {score.name}: {score.score}
-          </li>
-        ))}
+        <table className="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {scores.map((entry, index) => (
+              <tr key={index} className="leaderboard-entry">
+                <td>{index + 1}</td>
+                <td>{entry.name}</td>
+                <td>{entry.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </ul>
     </div>
   );
