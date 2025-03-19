@@ -80,7 +80,6 @@ export default function DiceGame() {
       setScore((prevScore) => prevScore + roundScore);
       setRoundScores((prevScores) => [...prevScores, roundScore]);
       setGameOver(true);
-      playedGame();
     }
     if (currentRound < 5) {
       const roundScore = CalculateScore(rolls[currentRound]);
@@ -211,6 +210,7 @@ export default function DiceGame() {
                   score={score}
                   onScoreSubmitted={() => {
                     resetGame();
+                    playedGame();
                   }}
                   playerName={playerName}
                 />
